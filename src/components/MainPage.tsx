@@ -13,7 +13,7 @@ const MainPage = () => {
   return (
     <div className="w-1/2 mx-auto bg-blue-500">
       <header className="px-3">
-        <button>
+        <button onClick={() => setItemIds([])}>
           Reset
         </button>
       </header>
