@@ -7,9 +7,10 @@ import { arrowPathSVG, minusSVG } from "@/utils/svgs";
 
 interface ItemSelectProps {
   items: MinecraftItem[];
+  iconsMap: Record<string, string>;
 }
 
-const ItemSelector = ({ items } : ItemSelectProps) => {
+const ItemSelector = ({ items, iconsMap } : ItemSelectProps) => {
   const [selected, setSelected] = useState<MinecraftItem[]>([]);
 
   const addItem = (item: MinecraftItem) => {
@@ -58,6 +59,7 @@ const ItemSelector = ({ items } : ItemSelectProps) => {
         {items.map((item: MinecraftItem) => (
           <li key={item.id}>
             <button onClick={() => addItem(item)}>{item.displayName}</button>
+
           </li>
         ))}
       </ul>
