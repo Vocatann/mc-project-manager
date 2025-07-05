@@ -1,24 +1,24 @@
-import minecraftData from 'minecraft-data'
-import minecraftAssets from 'minecraft-assets';
+import minecraftData from '@/data/items.json'
 
 import ItemSelector from "@/app/ItemSelector";
 import { MinecraftItem } from '@/types/types';
+import { ItemCategories } from '@/types/enums';
 
 export default async function Home() {
-  const version = '1.21.1';
 
-  const assets = minecraftAssets(version);
-  const data = minecraftData(version);
-  const items: MinecraftItem[] = Object.values(data.items) as MinecraftItem[];
+  const items: MinecraftItem[] = Object.values(minecraftData) as MinecraftItem[];
 
-  const iconsMap: Record<string, string> = {};
+  const itemCategoriesMap: Map<ItemCategories, MinecraftItem[]> = new Map();
   for (const item of items) {
-    if (item.name !== 'air') {
-      const texture = assets.getTexture(item.name);
-      if (texture && typeof texture === 'string') {
-        iconsMap[item.name] = `/textures/${texture}`;
-      }
+    if (item.name === 'air') continue;
+
+    const category = item.category;
+
+    if (!itemCategoriesMap.has(category)) {
+      itemCategoriesMap.set(category, []);
     }
+
+    itemCategoriesMap.get(category)!.push(item);
   }
 
   return (
@@ -37,7 +37,7 @@ export default async function Home() {
         </div>
         <h1 className="text-xl md:text-2xl lg:text-3xl text-center  w-1/2 lg:w-1/3">Minecraft Todo List</h1>
       </header>
-      <ItemSelector items={items} iconsMap={iconsMap}/>
+      <ItemSelector itemsMap={itemCategoriesMap}/>
     </div>
   );
 }

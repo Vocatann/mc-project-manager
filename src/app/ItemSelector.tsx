@@ -1,17 +1,19 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 import { MinecraftItem } from "@/types/types";
+import { ItemCategories } from "@/types/enums";
 import { arrowPathSVG, minusSVG } from "@/utils/svgs";
 
 interface ItemSelectProps {
-  items: MinecraftItem[];
-  iconsMap: Record<string, string>;
+  itemsMap: Map<ItemCategories, MinecraftItem[]>;
 }
 
-const ItemSelector = ({ items, iconsMap } : ItemSelectProps) => {
+const ItemSelector = ({ itemsMap } : ItemSelectProps) => {
   const [selected, setSelected] = useState<MinecraftItem[]>([]);
+  const [currentCategory, setCurrentCategory] = useState<ItemCategories>(ItemCategories.Blocks);
 
   const addItem = (item: MinecraftItem) => {
     if (!selected.find((i) => i.id === item.id)) {
@@ -25,8 +27,53 @@ const ItemSelector = ({ items, iconsMap } : ItemSelectProps) => {
 
   return (
 
-    <div>
-      <section className="border-2 rounded-sm border-border w-1/2 mx-auto mt-20">
+    <div className="mx-5 mt-10 flex gap-5">
+      <section className="w-1/2">
+        <ul className="flex gap-2">
+          <li className="border-2 border-b-0 border-border rounded-t-lg w-[44px] h-[44px] overflow-hidden">
+            <CategorySelectButton category={ItemCategories.Blocks} setCurrentCategory={setCurrentCategory}/>
+          </li>
+          <li className="border-2 border-b-0 border-border rounded-t-lg w-[44px] h-[44px] overflow-hidden">
+            <CategorySelectButton category={ItemCategories.Decorative} setCurrentCategory={setCurrentCategory}/>
+          </li>
+          <li className="border-2 border-b-0 border-border rounded-t-lg w-[44px] h-[44px] overflow-hidden">
+            <CategorySelectButton category={ItemCategories.Materials} setCurrentCategory={setCurrentCategory}/>
+          </li>
+          <li className="border-2 border-b-0 border-border rounded-t-lg w-[44px] h-[44px] overflow-hidden">
+            <CategorySelectButton category={ItemCategories.Food} setCurrentCategory={setCurrentCategory}/>
+          </li>
+          <li className="border-2 border-b-0 border-border rounded-t-lg w-[44px] h-[44px] overflow-hidden">
+            <CategorySelectButton category={ItemCategories.Redstone} setCurrentCategory={setCurrentCategory}/>
+          </li>
+        </ul>
+
+        <ul className="flex flex-wrap gap-1 p-1 h-[400px] overflow-y-scroll border-2 rounded-sm border-border">
+          {(itemsMap.get(currentCategory) ?? []).map((item: MinecraftItem) => {
+            if (item.name === "air") return null;
+            return (
+              <li key={item.id} className="border-2 rounded-sm border-border w-[44px] h-[44px] overflow-hidden">
+                <button className="" onClick={() => addItem(item)}><Image src={`/icons/${item.name}.png`} alt={item.displayName} width={32} height={32}/></button>
+              </li>
+            );
+          })}
+        </ul>
+
+        <ul className="flex gap-2">
+          <li className="border-2 border-t-0 border-border rounded-b-lg w-[44px] h-[44px] overflow-hidden">
+            <CategorySelectButton category={ItemCategories.Misc} setCurrentCategory={setCurrentCategory}/>
+          </li>
+          <li className="border-2 border-t-0 border-border rounded-b-lg w-[44px] h-[44px] overflow-hidden">
+            <CategorySelectButton category={ItemCategories.Armor} setCurrentCategory={setCurrentCategory}/>
+          </li>
+          <li className="border-2 border-t-0 border-border rounded-b-lg w-[44px] h-[44px] overflow-hidden">
+            <CategorySelectButton category={ItemCategories.Tools} setCurrentCategory={setCurrentCategory}/>
+          </li>
+          <li className="border-2 border-t-0 border-border rounded-b-lg w-[44px] h-[44px] overflow-hidden">
+            <CategorySelectButton category={ItemCategories.SpawnEgg} setCurrentCategory={setCurrentCategory}/>
+          </li>
+        </ul>
+      </section>
+      <section className="border-2 rounded-sm border-border w-1/2">
         <ul className="border-b-2 border-border flex items-center">
           <li>
             <button
@@ -55,16 +102,21 @@ const ItemSelector = ({ items, iconsMap } : ItemSelectProps) => {
           ))}
         </ul>
       </section>
-      <ul>
-        {items.map((item: MinecraftItem) => (
-          <li key={item.id}>
-            <button onClick={() => addItem(item)}>{item.displayName}</button>
-
-          </li>
-        ))}
-      </ul>
     </div>
   );
 };
+
+interface CategorySelectButtonProps {
+  category: ItemCategories;
+  setCurrentCategory: (category: ItemCategories) => void;
+}
+
+const CategorySelectButton = ({ category, setCurrentCategory } : CategorySelectButtonProps) => {
+  return (
+    <button onClick={() => setCurrentCategory(category)}>
+      {category}
+    </button>
+  );
+}
 
 export default ItemSelector;
