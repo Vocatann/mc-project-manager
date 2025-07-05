@@ -47,12 +47,26 @@ const ItemSelector = ({ itemsMap } : ItemSelectProps) => {
           </li>
         </ul>
 
-        <ul className="flex flex-wrap gap-1 p-1 h-[400px] overflow-y-scroll border-2 rounded-sm border-border">
+        <ul className="flex flex-wrap gap-y-1 gap-x-1 p-1 h-[400px] overflow-y-scroll border-2 rounded-sm border-border content-start">
           {(itemsMap.get(currentCategory) ?? []).map((item: MinecraftItem) => {
             if (item.name === "air") return null;
             return (
-              <li key={item.id} className="border-2 rounded-sm border-border w-[44px] h-[44px] overflow-hidden">
-                <button className="" onClick={() => addItem(item)}><Image src={`/icons/${item.name}.png`} alt={item.displayName} width={32} height={32}/></button>
+              <li
+                key={item.id}
+                className="w-[44px] h-[44px] border-2 border-border rounded-sm m-0"
+              >
+                <button
+                  onClick={() => addItem(item)}
+                  className="w-full h-full flex items-center justify-center p-0"
+                >
+                  <Image
+                    src={`/icons/${item.name}.png`}
+                    alt={item.displayName}
+                    width={32}
+                    height={32}
+                    className="pointer-events-none"
+                  />
+                </button>
               </li>
             );
           })}
