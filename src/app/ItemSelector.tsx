@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import Image from "next/image";
 
 import { MinecraftItem, SelectedMinecraftItem } from "@/types/types";
-import { ItemCategories } from "@/types/enums";
+import { ItemCategories, Metrics } from "@/types/enums";
 import { ArrowPathSVG, MinusSVG, ChevronDownSVG, ChevronUpSVG } from "@/utils/svgs";
 
 interface ItemSelectProps {
@@ -19,7 +19,7 @@ const ItemSelector = ({ itemsMap } : ItemSelectProps) => {
     const numericValue = value === "" ? null : Math.max(0, Math.min(parseInt(value) || 0, 9999));
     setSelected(prevSelected =>
       prevSelected.map(item =>
-        item.mcItem.id === id ? { ...item, amount: numericValue } : item
+        item.mcItem.id === id ? { ...item, amount: numericValue, ...calculateMetrics(numericValue, item.mcItem.stackSize), } : item
       )
     );
   };
@@ -41,6 +41,7 @@ const ItemSelector = ({ itemsMap } : ItemSelectProps) => {
           ? {
               ...item,
               amount: item.amount === null ? 1 : Math.min(item.amount + 1, 9999),
+              ...calculateMetrics(item.amount === null ? 1 : Math.min(item.amount + 1, 9999), item.mcItem.stackSize),
             }
           : item
       )
@@ -54,6 +55,7 @@ const ItemSelector = ({ itemsMap } : ItemSelectProps) => {
           ? {
               ...item,
               amount: item.amount === null ? 0 : Math.max(item.amount - 1, 1),
+              ...calculateMetrics(item.amount === null ? 0 : Math.max(item.amount - 1, 1), item.mcItem.stackSize),
             }
           : item
       )
@@ -93,6 +95,17 @@ const ItemSelector = ({ itemsMap } : ItemSelectProps) => {
       holdRef.current.lastUpdate = null;
     }
   };
+
+  const [selectedMetric, setSelectedMetric] = useState<Metrics>(Metrics.Stacks);
+
+  const calculateMetrics = (amount: number | null, stackSize: number) => {
+    const value = amount || 0;
+    return {
+      amountInStacks: Number((value / stackSize).toFixed(1)),
+      amountInDoubleChests: Number((value / (stackSize * 54)).toFixed(1)),
+      amountInShulkers: Number((value / (stackSize * 27)).toFixed(1)),
+    }
+  } 
 
   return (
 
@@ -166,6 +179,15 @@ const ItemSelector = ({ itemsMap } : ItemSelectProps) => {
               <ArrowPathSVG/>
             </button>
           </li>
+          <select
+            value={selectedMetric}
+            onChange={(e) => setSelectedMetric(e.target.value as Metrics.Stacks | Metrics.DoubleChests | Metrics.Shulkers)}
+            className="border-r-2 border-border rounded-sm px-1 h-10 bg-background"
+          >
+            <option value="stacks">Stacks</option>
+            <option value="doubleChests">Double Chests</option>
+            <option value="shulkers">Shulkers</option>
+          </select>
         </ul>
         <ul className="flex flex-col gap-y-2 p-3">
           {selected.map((item) => (
@@ -213,6 +235,11 @@ const ItemSelector = ({ itemsMap } : ItemSelectProps) => {
                       <ChevronDownSVG/>
                     </button>
                   </div>
+                  <span>
+                    {selectedMetric === "stacks" && `${item.amountInStacks} stacks`}
+                    {selectedMetric === "doubleChests" && `${item.amountInDoubleChests} chests`}
+                    {selectedMetric === "shulkers" && `${item.amountInShulkers} shulkers`}
+                  </span>
                 </div>
 
               </div>
