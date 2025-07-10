@@ -9,3 +9,9 @@ export enum ItemCategories {
   Decorative = 'decorative',
   Misc = 'misc',
 };
+
+export enum Metrics {
+  Stacks = 'stacks',
+  DoubleChests = 'doubleChests',
+  Shulkers = 'shulkers',
+}

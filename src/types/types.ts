@@ -7,3 +7,11 @@ export type MinecraftItem = {
   stackSize: number;
   category: ItemCategories;
 };
+
+export type SelectedMinecraftItem = {
+  mcItem: MinecraftItem;
+  amount: number | null;
+  amountInStacks: number;
+  amountInDoubleChests: number;
+  amountInShulkers: number;
+};

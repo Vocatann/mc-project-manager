@@ -1,34 +1,103 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 
-import { MinecraftItem } from "@/types/types";
+import { MinecraftItem, SelectedMinecraftItem } from "@/types/types";
 import { ItemCategories } from "@/types/enums";
-import { arrowPathSVG, minusSVG } from "@/utils/svgs";
+import { ArrowPathSVG, MinusSVG, ChevronDownSVG, ChevronUpSVG } from "@/utils/svgs";
 
 interface ItemSelectProps {
   itemsMap: Map<ItemCategories, MinecraftItem[]>;
 }
 
 const ItemSelector = ({ itemsMap } : ItemSelectProps) => {
-  const [selected, setSelected] = useState<MinecraftItem[]>([]);
+  const [selected, setSelected] = useState<SelectedMinecraftItem[]>([]);
   const [currentCategory, setCurrentCategory] = useState<ItemCategories>(ItemCategories.Blocks);
 
+  const handleInputChange = (id: number, value: string) => {
+    const numericValue = value === "" ? null : Math.max(0, Math.min(parseInt(value) || 0, 9999));
+    setSelected(prevSelected =>
+      prevSelected.map(item =>
+        item.mcItem.id === id ? { ...item, amount: numericValue } : item
+      )
+    );
+  };
+
   const addItem = (item: MinecraftItem) => {
-    if (!selected.find((i) => i.id === item.id)) {
-      setSelected([...selected, item]);
+    if (!selected.find(i => i.mcItem.id === item.id)) {
+      setSelected([...selected, { mcItem: item, amount: 1, amountInStacks: 0, amountInDoubleChests: 0, amountInShulkers: 0 }]);
     }
   };
 
-  const removeItem = (item: MinecraftItem) => {
-    setSelected(selected.filter((i) => i.id !== item.id));
+  const removeItem = (item: SelectedMinecraftItem) => {
+    setSelected(selected.filter(i => i.mcItem.id !== item.mcItem.id));
+  };
+
+  const handleIncrement = (id: number) => {
+    setSelected(prev =>
+      prev.map(item =>
+        item.mcItem.id === id
+          ? {
+              ...item,
+              amount: item.amount === null ? 1 : Math.min(item.amount + 1, 9999),
+            }
+          : item
+      )
+    );
+  };
+
+  const handleDecrement = (id: number) => {
+    setSelected(prev =>
+      prev.map(item =>
+        item.mcItem.id === id
+          ? {
+              ...item,
+              amount: item.amount === null ? 0 : Math.max(item.amount - 1, 1),
+            }
+          : item
+      )
+    );
+  };
+
+  const holdRef = useRef<{ action: (() => void) | null; lastUpdate: number | null; rafId: number | null }>({
+    action: null,
+    lastUpdate: null,
+    rafId: null,
+  });
+
+  const HOLD_INTERVAL_MS = 90;
+
+  const startHold = (action: () => void) => {
+    holdRef.current.action = action;
+    holdRef.current.lastUpdate = performance.now();
+    const step = (now: number) => {
+      if (holdRef.current.action && holdRef.current.lastUpdate) {
+        if (now - holdRef.current.lastUpdate >= HOLD_INTERVAL_MS) {
+          holdRef.current.action();
+          holdRef.current.lastUpdate = now;
+        }
+        holdRef.current.rafId = requestAnimationFrame(step);
+      }
+    };
+    action();
+    holdRef.current.lastUpdate = performance.now();
+    holdRef.current.rafId = requestAnimationFrame(step);
+  };
+
+  const stopHold = () => {
+    if (holdRef.current.rafId !== null) {
+      cancelAnimationFrame(holdRef.current.rafId);
+      holdRef.current.rafId = null;
+      holdRef.current.action = null;
+      holdRef.current.lastUpdate = null;
+    }
   };
 
   return (
 
-    <div className="mx-5 mt-10 flex gap-5">
-      <section className="w-1/2">
+    <div className="mx-5 mt-10 flex flex-col md:flex-row gap-5">
+      <section className="w-full md:w-1/2">
         <ul className="flex gap-2">
           <li className="border-2 border-b-0 border-border rounded-t-lg w-[44px] h-[44px] overflow-hidden">
             <CategorySelectButton category={ItemCategories.Blocks} setCurrentCategory={setCurrentCategory}/>
@@ -47,7 +116,7 @@ const ItemSelector = ({ itemsMap } : ItemSelectProps) => {
           </li>
         </ul>
 
-        <ul className="flex flex-wrap gap-y-1 gap-x-1 p-1 h-[400px] overflow-y-scroll border-2 rounded-sm border-border content-start">
+        <ul className="flex flex-wrap gap-y-1 gap-x-1 p-1 h-[500px] overflow-y-auto border-2 rounded-sm border-border content-start">
           {(itemsMap.get(currentCategory) ?? []).map((item: MinecraftItem) => {
             if (item.name === "air") return null;
             return (
@@ -57,10 +126,10 @@ const ItemSelector = ({ itemsMap } : ItemSelectProps) => {
               >
                 <button
                   onClick={() => addItem(item)}
-                  className="w-full h-full flex items-center justify-center p-0"
+                  className="w-full h-full flex items-center justify-center p-0 overflow-hidden"
                 >
                   <Image
-                    src={`/icons/${item.name}.png`}
+                    src={`/textures/items/${item.name}.png`}
                     alt={item.displayName}
                     width={32}
                     height={32}
@@ -87,30 +156,68 @@ const ItemSelector = ({ itemsMap } : ItemSelectProps) => {
           </li>
         </ul>
       </section>
-      <section className="border-2 rounded-sm border-border w-1/2">
+      <section className="border-2 rounded-sm border-border w-full md:w-1/2 min-h-[500px]">
         <ul className="border-b-2 border-border flex items-center">
           <li>
             <button
               onClick={() => setSelected([])}
               className="w-auto px-2 h-10 flex items-center justify-center border-r-2 border-border hover:bg-border"
             >
-              {arrowPathSVG}
-            </button>
-          </li>
-          <li>
-            <button
-              className="w-auto px-2 h-10 flex items-center justify-center border-r-2 border-border hover:bg-border"
-            >
-              metric
+              <ArrowPathSVG/>
             </button>
           </li>
         </ul>
-        <ul>
+        <ul className="flex flex-col gap-y-2 p-3">
           {selected.map((item) => (
-            <li key={item.id}>
-              {item.displayName}
+            <li 
+              className="flex items-center justify-between"
+              key={item.mcItem.id}
+            >
+              <div className="flex items-center justify-between w-full lg:w-5/6">
+                <div className="flex items-center gap-x-5 pr-3">
+                  <Image
+                    src={`/textures/items/${item.mcItem.name}.png`}
+                    alt={item.mcItem.displayName}
+                    width={32}
+                    height={32}
+                    className="pointer-events-none"
+                  />
+                  {item.mcItem.displayName}
+                </div>
+                <div className="flex items-center gap-5">
+                  <input 
+                    id={`input-${item.mcItem.id}`}
+                    type="number"
+                    value={item.amount ?? ""}
+                    onChange={(e) => handleInputChange(item.mcItem.id, e.target.value)}
+                    className="input-no-spinner bg-background border-b-2 border-border min-w-[32px] w-1/4"
+                  />
+                  <div className="flex flex-col">
+                    <button
+                      onMouseDown={() => startHold(() => handleIncrement(item.mcItem.id))}
+                      onMouseUp={stopHold}
+                      onMouseLeave={stopHold}
+                      onTouchStart={() => startHold(() => handleIncrement(item.mcItem.id))}
+                      onTouchEnd={stopHold}
+                    >
+                      <ChevronUpSVG/>
+                    </button>
+
+                    <button
+                      onMouseDown={() => startHold(() => handleDecrement(item.mcItem.id))}
+                      onMouseUp={stopHold}
+                      onMouseLeave={stopHold}
+                      onTouchStart={() => startHold(() => handleDecrement(item.mcItem.id))}
+                      onTouchEnd={stopHold}
+                    >
+                      <ChevronDownSVG/>
+                    </button>
+                  </div>
+                </div>
+
+              </div>
               <button onClick={() => removeItem(item)}>
-                {minusSVG}
+                <MinusSVG/>
               </button>
             </li>
           ))}
