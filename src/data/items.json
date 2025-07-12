@@ -2006,14 +2006,14 @@
     "name": "bookshelf",
     "displayName": "Bookshelf",
     "stackSize": 64,
-    "category": "misc"
+    "category": "books"
   },
   {
     "id": 287,
     "name": "chiseled_bookshelf",
     "displayName": "Chiseled Bookshelf",
     "stackSize": 64,
-    "category": "misc"
+    "category": "books"
   },
   {
     "id": 288,
@@ -5363,42 +5363,42 @@
     "name": "saddle",
     "displayName": "Saddle",
     "stackSize": 1,
-    "category": "misc"
+    "category": "transportation"
   },
   {
     "id": 766,
     "name": "minecart",
     "displayName": "Minecart",
     "stackSize": 1,
-    "category": "misc"
+    "category": "transportation"
   },
   {
     "id": 767,
     "name": "chest_minecart",
     "displayName": "Minecart with Chest",
     "stackSize": 1,
-    "category": "misc"
+    "category": "transportation"
   },
   {
     "id": 768,
     "name": "furnace_minecart",
     "displayName": "Minecart with Furnace",
     "stackSize": 1,
-    "category": "misc"
+    "category": "transportation"
   },
   {
     "id": 769,
     "name": "tnt_minecart",
     "displayName": "Minecart with TNT",
     "stackSize": 1,
-    "category": "misc"
+    "category": "transportation"
   },
   {
     "id": 770,
     "name": "hopper_minecart",
     "displayName": "Minecart with Hopper",
     "stackSize": 1,
-    "category": "misc"
+    "category": "transportation"
   },
   {
     "id": 771,
@@ -5445,112 +5445,112 @@
     "name": "oak_boat",
     "displayName": "Oak Boat",
     "stackSize": 1,
-    "category": "misc"
+    "category": "transportation"
   },
   {
     "id": 775,
     "name": "oak_chest_boat",
     "displayName": "Oak Boat with Chest",
     "stackSize": 1,
-    "category": "misc"
+    "category": "transportation"
   },
   {
     "id": 776,
     "name": "spruce_boat",
     "displayName": "Spruce Boat",
     "stackSize": 1,
-    "category": "misc"
+    "category": "transportation"
   },
   {
     "id": 777,
     "name": "spruce_chest_boat",
     "displayName": "Spruce Boat with Chest",
     "stackSize": 1,
-    "category": "misc"
+    "category": "transportation"
   },
   {
     "id": 778,
     "name": "birch_boat",
     "displayName": "Birch Boat",
     "stackSize": 1,
-    "category": "misc"
+    "category": "transportation"
   },
   {
     "id": 779,
     "name": "birch_chest_boat",
     "displayName": "Birch Boat with Chest",
     "stackSize": 1,
-    "category": "misc"
+    "category": "transportation"
   },
   {
     "id": 780,
     "name": "jungle_boat",
     "displayName": "Jungle Boat",
     "stackSize": 1,
-    "category": "misc"
+    "category": "transportation"
   },
   {
     "id": 781,
     "name": "jungle_chest_boat",
     "displayName": "Jungle Boat with Chest",
     "stackSize": 1,
-    "category": "misc"
+    "category": "transportation"
   },
   {
     "id": 782,
     "name": "acacia_boat",
     "displayName": "Acacia Boat",
     "stackSize": 1,
-    "category": "misc"
+    "category": "transportation"
   },
   {
     "id": 783,
     "name": "acacia_chest_boat",
     "displayName": "Acacia Boat with Chest",
     "stackSize": 1,
-    "category": "misc"
+    "category": "transportation"
   },
   {
     "id": 784,
     "name": "cherry_boat",
     "displayName": "Cherry Boat",
     "stackSize": 1,
-    "category": "misc"
+    "category": "transportation"
   },
   {
     "id": 785,
     "name": "cherry_chest_boat",
     "displayName": "Cherry Boat with Chest",
     "stackSize": 1,
-    "category": "misc"
+    "category": "transportation"
   },
   {
     "id": 786,
     "name": "dark_oak_boat",
     "displayName": "Dark Oak Boat",
     "stackSize": 1,
-    "category": "misc"
+    "category": "transportation"
   },
   {
     "id": 787,
     "name": "dark_oak_chest_boat",
     "displayName": "Dark Oak Boat with Chest",
     "stackSize": 1,
-    "category": "misc"
+    "category": "transportation"
   },
   {
     "id": 788,
     "name": "mangrove_boat",
     "displayName": "Mangrove Boat",
     "stackSize": 1,
-    "category": "misc"
+    "category": "transportation"
   },
   {
     "id": 789,
     "name": "mangrove_chest_boat",
     "displayName": "Mangrove Boat with Chest",
     "stackSize": 1,
-    "category": "misc"
+    "category": "transportation"
   },
   {
     "id": 790,
@@ -5640,7 +5640,7 @@
     "name": "bowl",
     "displayName": "Bowl",
     "stackSize": 64,
-    "category": "misc"
+    "category": "tools"
   },
   {
     "id": 800,
@@ -5660,7 +5660,7 @@
       "vanishing"
     ],
     "maxDurability": 384,
-    "category": "misc"
+    "category": "tools"
   },
   {
     "id": 802,
@@ -5688,14 +5688,14 @@
     "name": "diamond",
     "displayName": "Diamond",
     "stackSize": 64,
-    "category": "misc"
+    "category": "materials"
   },
   {
     "id": 806,
     "name": "emerald",
     "displayName": "Emerald",
     "stackSize": 64,
-    "category": "misc"
+    "category": "materials"
   },
   {
     "id": 807,
@@ -7051,21 +7051,21 @@
     "name": "bucket",
     "displayName": "Bucket",
     "stackSize": 16,
-    "category": "misc"
+    "category": "buckets"
   },
   {
     "id": 909,
     "name": "water_bucket",
     "displayName": "Water Bucket",
     "stackSize": 1,
-    "category": "misc"
+    "category": "buckets"
   },
   {
     "id": 910,
     "name": "lava_bucket",
     "displayName": "Lava Bucket",
     "stackSize": 1,
-    "category": "misc"
+    "category": "buckets"
   },
   {
     "id": 911,
@@ -7093,7 +7093,7 @@
     "name": "milk_bucket",
     "displayName": "Milk Bucket",
     "stackSize": 1,
-    "category": "misc"
+    "category": "buckets"
   },
   {
     "id": 915,
@@ -7114,7 +7114,7 @@
     "name": "cod_bucket",
     "displayName": "Bucket of Cod",
     "stackSize": 1,
-    "category": "misc"
+    "category": "food"
   },
   {
     "id": 918,
@@ -7128,14 +7128,14 @@
     "name": "axolotl_bucket",
     "displayName": "Bucket of Axolotl",
     "stackSize": 1,
-    "category": "misc"
+    "category": "buckets"
   },
   {
     "id": 920,
     "name": "tadpole_bucket",
     "displayName": "Bucket of Tadpole",
     "stackSize": 1,
-    "category": "misc"
+    "category": "buckets"
   },
   {
     "id": 921,
@@ -7170,7 +7170,7 @@
     "name": "book",
     "displayName": "Book",
     "stackSize": 64,
-    "category": "misc"
+    "category": "books"
   },
   {
     "id": 926,
@@ -7249,7 +7249,7 @@
     "name": "cod",
     "displayName": "Raw Cod",
     "stackSize": 64,
-    "category": "misc"
+    "category": "food"
   },
   {
     "id": 936,
@@ -7277,7 +7277,7 @@
     "name": "cooked_cod",
     "displayName": "Cooked Cod",
     "stackSize": 64,
-    "category": "misc"
+    "category": "food"
   },
   {
     "id": 940,
@@ -7312,112 +7312,112 @@
     "name": "white_dye",
     "displayName": "White Dye",
     "stackSize": 64,
-    "category": "misc"
+    "category": "dyes"
   },
   {
     "id": 945,
     "name": "orange_dye",
     "displayName": "Orange Dye",
     "stackSize": 64,
-    "category": "misc"
+    "category": "dyes"
   },
   {
     "id": 946,
     "name": "magenta_dye",
     "displayName": "Magenta Dye",
     "stackSize": 64,
-    "category": "misc"
+    "category": "dyes"
   },
   {
     "id": 947,
     "name": "light_blue_dye",
     "displayName": "Light Blue Dye",
     "stackSize": 64,
-    "category": "misc"
+    "category": "dyes"
   },
   {
     "id": 948,
     "name": "yellow_dye",
     "displayName": "Yellow Dye",
     "stackSize": 64,
-    "category": "misc"
+    "category": "dyes"
   },
   {
     "id": 949,
     "name": "lime_dye",
     "displayName": "Lime Dye",
     "stackSize": 64,
-    "category": "misc"
+    "category": "dyes"
   },
   {
     "id": 950,
     "name": "pink_dye",
     "displayName": "Pink Dye",
     "stackSize": 64,
-    "category": "misc"
+    "category": "dyes"
   },
   {
     "id": 951,
     "name": "gray_dye",
     "displayName": "Gray Dye",
     "stackSize": 64,
-    "category": "misc"
+    "category": "dyes"
   },
   {
     "id": 952,
     "name": "light_gray_dye",
     "displayName": "Light Gray Dye",
     "stackSize": 64,
-    "category": "misc"
+    "category": "dyes"
   },
   {
     "id": 953,
     "name": "cyan_dye",
     "displayName": "Cyan Dye",
     "stackSize": 64,
-    "category": "misc"
+    "category": "dyes"
   },
   {
     "id": 954,
     "name": "purple_dye",
     "displayName": "Purple Dye",
     "stackSize": 64,
-    "category": "misc"
+    "category": "dyes"
   },
   {
     "id": 955,
     "name": "blue_dye",
     "displayName": "Blue Dye",
     "stackSize": 64,
-    "category": "misc"
+    "category": "dyes"
   },
   {
     "id": 956,
     "name": "brown_dye",
     "displayName": "Brown Dye",
     "stackSize": 64,
-    "category": "misc"
+    "category": "dyes"
   },
   {
     "id": 957,
     "name": "green_dye",
     "displayName": "Green Dye",
     "stackSize": 64,
-    "category": "misc"
+    "category": "dyes"
   },
   {
     "id": 958,
     "name": "red_dye",
     "displayName": "Red Dye",
     "stackSize": 64,
-    "category": "misc"
+    "category": "dyes"
   },
   {
     "id": 959,
     "name": "black_dye",
     "displayName": "Black Dye",
     "stackSize": 64,
-    "category": "misc"
+    "category": "dyes"
   },
   {
     "id": 960,
@@ -7850,7 +7850,7 @@
     "name": "cod_spawn_egg",
     "displayName": "Cod Spawn Egg",
     "stackSize": 64,
-    "category": "spawn_egg"
+    "category": "food"
   },
   {
     "id": 1021,
@@ -8095,7 +8095,7 @@
     "name": "rabbit_spawn_egg",
     "displayName": "Rabbit Spawn Egg",
     "stackSize": 64,
-    "category": "spawn_egg"
+    "category": "food"
   },
   {
     "id": 1056,
@@ -8347,14 +8347,14 @@
     "name": "writable_book",
     "displayName": "Book and Quill",
     "stackSize": 1,
-    "category": "misc"
+    "category": "books"
   },
   {
     "id": 1092,
     "name": "written_book",
     "displayName": "Written Book",
     "stackSize": 16,
-    "category": "misc"
+    "category": "books"
   },
   {
     "id": 1093,
@@ -8547,7 +8547,7 @@
     "name": "enchanted_book",
     "displayName": "Enchanted Book",
     "stackSize": 1,
-    "category": "misc"
+    "category": "books"
   },
   {
     "id": 1115,
@@ -8575,14 +8575,14 @@
     "name": "rabbit",
     "displayName": "Raw Rabbit",
     "stackSize": 64,
-    "category": "misc"
+    "category": "food"
   },
   {
     "id": 1119,
     "name": "cooked_rabbit",
     "displayName": "Cooked Rabbit",
     "stackSize": 64,
-    "category": "misc"
+    "category": "food"
   },
   {
     "id": 1120,
@@ -8596,14 +8596,14 @@
     "name": "rabbit_foot",
     "displayName": "Rabbit's Foot",
     "stackSize": 64,
-    "category": "misc"
+    "category": "food"
   },
   {
     "id": 1122,
     "name": "rabbit_hide",
     "displayName": "Rabbit Hide",
     "stackSize": 64,
-    "category": "misc"
+    "category": "food"
   },
   {
     "id": 1123,
@@ -8631,7 +8631,7 @@
     "name": "diamond_horse_armor",
     "displayName": "Diamond Horse Armor",
     "stackSize": 1,
-    "category": "misc"
+    "category": "materials"
   },
   {
     "id": 1127,
@@ -8929,7 +8929,7 @@
     "name": "knowledge_book",
     "displayName": "Knowledge Book",
     "stackSize": 1,
-    "category": "misc"
+    "category": "books"
   },
   {
     "id": 1167,
@@ -9089,7 +9089,7 @@
       "vanishing"
     ],
     "maxDurability": 250,
-    "category": "misc"
+    "category": "tools"
   },
   {
     "id": 1189,
@@ -9123,7 +9123,7 @@
       "vanishing"
     ],
     "maxDurability": 465,
-    "category": "misc"
+    "category": "tools"
   },
   {
     "id": 1193,

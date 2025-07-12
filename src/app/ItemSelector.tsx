@@ -142,7 +142,7 @@ const ItemSelector = ({ itemsMap } : ItemSelectProps) => {
                   className="w-full h-full flex items-center justify-center p-0 overflow-hidden"
                 >
                   <Image
-                    src={`/textures/items/${item.name}.png`}
+                    src={`/textures/${item.name}.png`}
                     alt={item.displayName}
                     width={32}
                     height={32}
@@ -198,7 +198,7 @@ const ItemSelector = ({ itemsMap } : ItemSelectProps) => {
               <div className="flex items-center justify-between w-full lg:w-5/6">
                 <div className="flex items-center gap-x-5 pr-3">
                   <Image
-                    src={`/textures/items/${item.mcItem.name}.png`}
+                    src={`/textures/${item.mcItem.name}.png`}
                     alt={item.mcItem.displayName}
                     width={32}
                     height={32}
